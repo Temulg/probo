@@ -1,0 +1,34 @@
+plugins {
+        id 'java'
+        id 'eclipse'
+}
+
+repositories {
+        mavenLocal()
+        mavenCentral()
+}
+
+dependencies {
+        compile 'com.beust:jcommander:1.72'
+
+        testCompile 'org.testng:testng:6.14.3'
+}
+
+eclipse {
+        classpath {
+                downloadSources = true
+                downloadJavadoc = true
+        }
+}
+
+jar {
+        manifest {
+                attributes 'Main-Class': 'teolg.terlom.Application'
+        }
+}
+
+test {
+        useTestNG()
+        outputs.upToDateWhen { false }
+        testLogging.showStandardStreams = true
+}
