@@ -1,34 +1,34 @@
 plugins {
-        id 'java'
-        id 'eclipse'
+	id 'java'
+	id 'eclipse'
 }
 
 repositories {
-        mavenLocal()
-        mavenCentral()
+	mavenLocal()
+	mavenCentral()
 }
 
 dependencies {
-        compile 'com.beust:jcommander:1.72'
-
-        testCompile 'org.testng:testng:6.14.3'
+	compile 'com.beust:jcommander:1.72'
+	compile 'org.apache.logging.log4j:log4j-api:2.10.0'
+	compile 'org.apache.logging.log4j:log4j-core:2.10.0'
 }
 
 eclipse {
-        classpath {
-                downloadSources = true
-                downloadJavadoc = true
-        }
+	classpath {
+		downloadSources = true
+		downloadJavadoc = true
+	}
 }
 
 jar {
-        manifest {
-                attributes 'Main-Class': 'teolg.terlom.Application'
-        }
+	manifest {
+		attributes 'Main-Class': 'temulg.probo.runner.Application'
+	}
 }
 
-test {
-        useTestNG()
-        outputs.upToDateWhen { false }
-        testLogging.showStandardStreams = true
+task testSome(type: JavaExec, dependsOn: 'assemble') {
+	classpath = sourceSets.main.runtimeClasspath
+	main = 'temulg.probo.runner.Application'
+	args sourceSets.test.output
 }
